@@ -1,4 +1,16 @@
-// C Program for Iterative Tower of Hanoi 
+/*
+stack 
+	push
+	pop
+	isempty
+	isfull
+toh
+	movediskbetweenpoles
+actual puzzle
+main
+*/	
+		
+ // C Program for Iterative Tower of Hanoi 
 #include <stdio.h> 
 #include <math.h> 
 #include <stdlib.h> 
@@ -96,8 +108,7 @@ void moveDisksBetweenTwoPoles(struct Stack *src,
 //Function to show the movement of disks 
 void moveDisk(char fromPeg, char toPeg, int disk) 
 { 
-    printf("Move the disk %d from \'%c\' to \'%c\'\n", 
-           disk, fromPeg, toPeg); 
+    printf("Move the disk %d from \'%c\' to \'%c\'\n", disk, fromPeg, toPeg); 
 } 
   
 //Function to implement TOH puzzle 
@@ -150,5 +161,5 @@ int main()
     dest = createStack(num_of_disks); 
   
     tohIterative(num_of_disks, src, aux, dest); 
-    return 0; 
-}
+    return 0;
+}     
