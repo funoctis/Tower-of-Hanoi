@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include<math.h>  
 void towers(int, char, char, char);    
+/*
 void main() 
 {
     int num,a,b;  
@@ -12,7 +13,8 @@ void main()
     printf("\nThe sequence of moves involved in the Tower of Hanoi are :\n"); 
     towers(num, 'A', 'C', 'B');
 }
- 
+*/ 
+
 void towers(int num, char from, char to, char aux)
  
 {
