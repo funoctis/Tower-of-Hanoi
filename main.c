@@ -1,11 +1,12 @@
 #include<stdio.h>
 #include<malloc.h>
-#include "toh_kaustubh.c"
+//#include "toh_kaustubh.c"
 
 void fillSrc(int n);
 void displaySrc(int n);
 void displaylevel(int level);
 void display(int n);
+void moveDisk(int n);
 
 struct pole
 {
@@ -15,11 +16,15 @@ struct pole
  
 void main()
 {
+    int i, oldPole, newPole;
+    printf("\n\n");
+    
     p[2].top = -1;
     p[3].top = -1;
     
     int n;
     
+    //ask user for number of disks (n)
     enter_disks:
         printf("Enter number of disks: ");
         scanf("%d", &n);
@@ -28,15 +33,42 @@ void main()
             goto enter_disks;
         }
     
+    //initialize pole 2,3 to all zeroes 
+    for(i=0; i<n; i++) {
+        p[2].stack[i]=0;
+        p[3].stack[i]=0;
+    }
+    
+    /*for(i=0; i<n; i++)
+    {
+        printf("%d\t", p[3].stack[i]);
+    }*/
+    //printf("\n\n");
+    
     fillSrc(n);
-    displaySrc(n);
-    printf("\n\n");
+    
+    //printf("\n\n");
+    
+    //displaySrc(n);
+    
+    //printf("\n\n");
+    
+    /*for(i=0; i<n; i++)
+    {
+        printf("%d\t", p[3].stack[i]);
+    }*/
+    
+    //printf("\n\n");
+    
     display(n);
 
+    moveDisk(n);
 
+    display(n);
 
 }
 
+//fill the source pole according to the number of disks
 void fillSrc(int n)
 {
     int i,temp = n;
@@ -47,6 +79,7 @@ void fillSrc(int n)
     }
 }
 
+//moving disks between poles 
 void moveDisk(int n)//int oldPole, int newPole, int n)
 {
     int oldPole, newPole;
@@ -57,9 +90,13 @@ void moveDisk(int n)//int oldPole, int newPole, int n)
         (p[newPole].top)++;
         p[newPole].stack[p[newPole].top] = p[oldPole].stack[p[oldPole].top]; 
     }
+    else 
+    {
+        printf("Cannot move");
+    }
 }
 
-
+/*
 void displaySrc(int n)
 {
     int i;
@@ -68,21 +105,23 @@ void displaySrc(int n)
         printf("%d\t", p[1].stack[i]);
     }
 }
+*/
 
-
+//printing a single level (function is called by the main display fn)
 void displaylevel(int level)
 {
     int i;
     for(i=1; i<=3; i++)
     {
-        //if(p[i].stack[level] != 0)
-        //{
+        if(p[i].stack[level] != 0)
+        {
             printf("%d\t",p[i].stack[level]);
-        //}
+        }
     }
     printf("\n");         
 }    
 
+//printing the stacks 
 void display(int n)
 {
     int i;
