@@ -1,0 +1,14 @@
+functions needed:
+    main()
+    
+    push(disk, pole)
+    
+    pop(disk, pole)
+    
+    display(all three at once)
+    
+    getTop(pole)
+    
+    ifMovePossible(pole1, pole2)
+
+    gameWinCondition()
