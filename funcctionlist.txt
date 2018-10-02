@@ -1,0 +1,14 @@
+functions needed checklist :
+    main()
+    
+    pop[1,2,3] {return disk;}
+    
+    push[1,2,3] (disk)
+    
+    display //all three at once
+    
+    // NOT NEEDED getTop(pole)  {return top;} //pass value to ifMovePossible 
+    
+    ifMovePossible(pole1, pole2)
+
+    gameWinCondition() 
