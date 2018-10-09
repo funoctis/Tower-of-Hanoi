@@ -1,12 +1,11 @@
 #include<stdio.h>
-//#include<malloc.h>
-//#include "toh_kaustubh.c"
 
 void fillSrc();
-void displaySrc(int n);
 void displaylevel(int level);
-void display(int n);
-void moveDisk(int n);
+void display();
+void push(int, int);
+int pop(int);
+int gameWinCondition();
 
 struct pole
 {
@@ -16,7 +15,7 @@ struct pole
  
 void main()
 {
-    int i, oldPole, newPole;
+    int i, old, new, x;
     printf("\n\n");
     p[1].top = -1;
     p[2].top = -1;
@@ -31,34 +30,25 @@ void main()
         p[3].stack[i]=0;
     }
     
-    /*for(i=0; i<n; i++)
-    {
-        printf("%d\t", p[3].stack[i]);
-    }*/
-    //printf("\n\n");
-    
     fillSrc();
     
     display(n);
-    printf("n is %d\n", n);
-    moveDisk(n);
-
+    
+    while(gameWinCondition() != 1)
+    printf("Choose your move:\n");
+    printf("Enter pole to pop from: ");
+    scanf("%d", &old);
+    x = pop(old);
+    printf("\nEnter pole to push to: ");
+    push(new, x);
+    printf("\n");
     display(n);
+
+    
 
 }
 
 //fill the source pole according to the number of disks
-/*
-void fillSrc(int n)
-{
-    int i,temp = n;
-    for(i=0; i<3; i++)
-    {
-        p[1].stack[p[1].top] = temp--;
-        (p[1].top)++;
-    }
-}
-*/
 void fillSrc()
 {
     p[1].top = 0;
@@ -71,65 +61,41 @@ void fillSrc()
 }
 
 
-//moving disks between poles 
-void moveDisk(int n)//int oldPole, int newPole, int n)
+//push to stack 
+void push(int pole, int x)
 {
-    int oldPole, newPole;
-    int top1 = p[oldPole].top, top2 = p[newPole].top;
-    printf("Enter current pole and then new pole: ");
-    scanf("%d%d",&oldPole, &newPole);
-    if(p[newPole].stack[p[newPole].top] != n-1) {
-        printf("old.%d\tnew.%d\n", p[oldPole].stack[top1], p[newPole].stack[top2]);
-        printf("top1.%d\ttop2.%d\n", p[oldPole].top, p[newPole].top);
-        if(p[oldPole].stack[top1] < p[newPole].stack[top2]) {
-        (p[newPole].top)++;
-        p[newPole].stack[p[newPole].top] = p[oldPole].stack[p[oldPole].top]; 
-        }
-        else {
-            printf("And Mand ka Tola\n");
-        }
-    }
-    else { 
-        printf("Cannot move");
-    }
+	int top1 = p[pole].top, num;
+    
+	p[pole].stack[top1]++;
+	printf("Enter integer element to push\n");
+	scanf("%d",&num);
+	s.stk[s.top]=num;
+	printf("Element pushed.\n");
+	
 }
 
-/*
-void displaySrc(int n)
-{
-    int i;
-    for(i=0; i<n; i++)
-    {
-        printf("%d\t", p[1].stack[i]);
-    }
-}
-*/
-
-//printing a single level (function is called by the main display fn)
+//printing a single level (function is called by display())
 void displaylevel(int level)
 {
     int i;
     for(i=1; i<=3; i++)
     {
-        if(p[i].stack[level] != 0)
-        {
-            printf("%d\t",p[i].stack[level]);
-        }
-        else {
-            printf("0\t");
-        }
+        printf("[%d]\t",p[i].stack[level]);
     }
     printf("\n");         
 }    
 
 //printing the stacks by calling displaylevel()
-void display(int n)
+void display()
 {
     
     int i;
-    for(i=n-1; i>=0; i--)
+    for(i=2; i>=0; i--)
     {
         displaylevel(i);
     }
-    
 }    
+
+int gameWinCondition() {
+    if(p[3].stack[0])
+}
