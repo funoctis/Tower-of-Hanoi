@@ -1,171 +1,97 @@
 #include<stdio.h>
-#include<malloc.h>
 
-struct node {
-    int data;
-    struct node *next;
+void fillSrc();
+void displaylevel(int level);
+void display();
+void push(int x);
+int pop();
+int gameWinCondition();
+
+struct pole
+{
+    int stack[3];
 };
 
-struct node *top1, *top2, *top3;
+struct pole p[3];
 
-int count1 = 0 , count2 = 0 , count3 = 0;
+int top[3];
+ 
+void main()
+{
+    top[2] = top [1] = -1;
+    int win = 0;
+    int x;
+    fillSrc();
+    display();
+    printf("Tower of Hanoi\n");
+    printf("Objective: Your goal is to insert the numbers into the third pole such that from top to bottom, they are in ascending order\n");
+    printf("Rule: You cannot put an greater number above a smaller number at any point in the game\n");
+    printf("Good luck!\n");
+    while(win != 1) {
+        x = pop();
+        push(x);
+        win = gameWinCondition();
+        display();
+    }
+    printf("Congratulations, you win!\n");
+}
 
-void push1(int n) {
-    struct node *new;
-    new = (struct node *)malloc(sizeof(struct node));
-    new -> data = n;
-    if(top1 == NULL) {
-        new -> next = NULL;
-        top1 = new;
+//fill the source pole according to the number of disks
+void fillSrc()
+{
+    p[0].stack[0] = 3;
+    p[0].stack[1] = 2;
+    p[0].stack[2] = 1;
+    top[0] = 2;
+}
+
+
+//push to stack 
+void push(int x)
+{
+	int pl;
+    chooseWhereToPush:
+    printf("Choose pole to push to: ");
+    scanf("%d", &pl);
+    printf("\n");
+    if(p[pl].stack[top[pl]] > x || p[pl].stack[top[pl]]==0) { 
+        top[pl]++;
+        p[pl].stack[top[pl]] = x;
     }
     else {
-        new -> next = top1;
-        top1 = new;
+        printf("Cannot push here. Try again.\n");
+        goto chooseWhereToPush;
     }
 }
 
-void push2(int n) {
-    struct node *new;
-    new = (struct node *)malloc(sizeof(struct node));
-    new -> data = n;
-    if(top2 == NULL) {
-        new -> next = NULL;
-        top2 = new;
-    }
-    else {
-        new -> next = top2;
-        top2 = new;
-    }
-}
-
-void push3(int n) {
-    struct node *new;
-    new = (struct node *)malloc(sizeof(struct node));
-    new -> data = n;
-    if(top3 == NULL) {
-        new -> next = NULL;
-        top3 = new;
-    }
-    else {
-        new -> next = top3;
-        top3 = new;
-    }
-}
-
-int pop1() {
-    struct node *temp;
-    int num;
-
-    if(top1 ==NULL) {
-        printf("Can't move, no disk found.\n");
-        return 0;
-    }
-    else {
-        temp = top1;
-        num = temp -> data;
-        top1 = top1 ->next;
-        free(temp);
-        return num;
-    }
-}
-
-int pop2() {
-    struct node *temp;
-    int num;
-
-    if(top2 == NULL) {
-        printf("Can't move, no disk found.\n");
-        return 0;
-    }
-    else {
-        temp = top2;
-        num = temp -> data;
-        top2 = top2 ->next;
-        free(temp);
-        return num;
-    }
-}
-
-int pop3() {
-    struct node *temp;
-    int num;
-
-    if(top3 == NULL) {
-        printf("Can't move, no disk found.\n");
-        return 0;
-    }
-    else {
-        temp = top3;
-        num = temp -> data;
-        top3 = top3 ->next;
-        free(temp);
-        return num;
-    }
-}
-
-void display() {
-    int i;
-    int a1[3], a2[3], a3[3];
-    struct node *temp;
-
-    temp = top1;
-    for(i=0; i<3; i++) {
-        if(temp == NULL) {
-            a1[i] = 0;
-            continue;
-        }
-        else {
-            a1[i] = temp -> data;
-        }
-        temp = temp -> next;
+int pop() {
+    int pl, x;
+    chooseWhereToPop:
+    printf("Choose pole to pop from: ");
+    scanf("%d", &pl);
+    printf("\n");
+    if(p[pl].stack[top[pl]] == -1) {
+        printf("Pole empty, cannot pop. Try again.\n");
+        goto chooseWhereToPop;
     }
     
-    temp = top2;
-    for(i=0; i<3; i++) {
-        if(temp == NULL) {
-            a2[i] = 0;
-            continue;
-        }
-        else {
-            a2[i] = temp -> data;
-        }
-        temp = temp -> next;
-    }
-
-    temp = top3;
-    for(i=0; i<3; i++) {
-        if(temp == NULL) {
-            a3[i] = 0;
-            continue;
-        }
-        else {
-            a3[i] = temp -> data;
-        }
-        temp = temp -> next;
-    }
-
-    printf("[%d]\t[%d]\t[%d]\n", a1[0], a2[0], a3[0]);
-    printf("[%d]\t[%d]\t[%d]\n", a1[1], a2[1], a3[1]);
-    printf("[%d]\t[%d]\t[%d]\n", a1[2], a2[2], a3[2]);
+    x = p[pl].stack[top[pl]];
+    p[pl].stack[top[pl]] = 99;
+    top[pl]--;
+    return x;
 }
 
-void fill1() {
-    push1(3);
-    push1(2);
-    push1(1);
-}
-
-int gameWinCondition() {
-    int arr[3], i;
-    struct node *temp;
-    temp = top3;
-    for(i=0; i<3; i++) {
-        if(temp == NULL) {
-            arr[i] = 0;
-            continue;
+//printing a single level (function is called by display())
+void displaylevel(int level)
+{
+    int i;
+    for(i=0; i<3; i++)
+    {
+        if(p[i].stack[level] == 99) {
+        	printf("[0]\t");
         }
         else {
-            arr[i] = temp -> data;
+        	printf("[%d]\t",p[i].stack[level]);
         }
         temp = temp -> next;
     }
@@ -177,68 +103,23 @@ int gameWinCondition() {
     }
 }
 
-void main() {
-    int i;
-    fill1();
-    int num, pole;
+//printing the stacks by calling displaylevel()
+void display()
+{
     
-   display();
-   while(gameWinCondition()!=1) {
-       label1:
-            printf("Choose pole to remove from: ");
-            scanf("%d", &pole);
-            switch(pole) {
-                case 1:
-                    if(top1==NULL)
-                        goto label1;
-                    num = pop1();
-                    break;
-                case 2:
-                    if(top2==NULL)
-                        goto label1;
-                    num = pop2();
-                    break;
-                case 3:
-                    if(top3==NULL)
-                        goto label1;
-                    num = pop3();
-                    break;
-                default:
-                    printf("Invalid pole name, try again.\n");
-                    goto label1;   
-            }
-        label2:
-            printf("Choose pole to add to: ");
-            scanf("%d", &pole);
-            switch(pole) {
-                case 1:
-                    if(top1 -> data > num)
-                        push1(num);
-                    else {
-                        printf("Cannot move here.\n");
-                        goto label2;
-                    }
-                    break;
-                case 2:
-                    if(top2 -> data > num)
-                        push2(num);
-                    else {
-                        printf("Cannot move here.\n");
-                        goto label2;
-                    }
-                    break;
-                case 3:
-                    if(top3 -> data > num)
-                        push3(num);
-                    else {
-                        printf("Cannot move here.\n");
-                        goto label2;
-                    }
-                    break;
-                default:
-                    printf("Invalid pole name, try again.\n");
-                    goto label2;        
-            }
-        display();
-   }
+    int i;
+    for(i=2; i>=0; i--)
+    {
+        displaylevel(i);
+    }
 }    
+
+
+int gameWinCondition() {
+    if(p[2].stack[0]==3 && p[2].stack[1]==2 && p[2].stack[2]==1) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
