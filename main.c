@@ -93,9 +93,15 @@ void displaylevel(int level)
         else {
         	printf("[%d]\t",p[i].stack[level]);
         }
+        temp = temp -> next;
     }
-    printf("\n");         
-}    
+    if(arr[1]==1 && arr[2]==2 && arr[3]==3) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
 
 //printing the stacks by calling displaylevel()
 void display()
