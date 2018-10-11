@@ -18,17 +18,20 @@ int top[3];
  
 void main()
 {
+    top[2] = top [1] = -1;
     int win = 0;
     int x;
     fillSrc();
     display();
+    printf("Tower of Hanoi\n");
+    printf("Objective: Your goal is to insert the numbers into the third pole such that from top to bottom, they are in ascending order\n");
+    printf("Rule: You cannot put an greater number above a smaller number at any point in the game\n");
+    printf("Good luck!\n");
     while(win != 1) {
         x = pop();
-        printf("Popped %d\n", x);
         push(x);
-        printf("Pushed %d", x);
         win = gameWinCondition();
-        printf("Evaluated win\n");
+        display();
     }
     printf("Congratulations, you win!\n");
 }
@@ -49,12 +52,11 @@ void push(int x)
 	int pl;
     chooseWhereToPush:
     printf("Choose pole to push to: ");
-    scanf("%d", pl);
+    scanf("%d", &pl);
     printf("\n");
-    if(p[pl].stack[top[pl]] > x) {
+    if(p[pl].stack[top[pl]] > x || p[pl].stack[top[pl]]==0) { 
         top[pl]++;
         p[pl].stack[top[pl]] = x;
-        printf("Pushed.\n");
     }
     else {
         printf("Cannot push here. Try again.\n");
@@ -74,7 +76,7 @@ int pop() {
     }
     
     x = p[pl].stack[top[pl]];
-    p[pl].stack[top[pl]] = 0;
+    p[pl].stack[top[pl]] = 99;
     top[pl]--;
     return x;
 }
@@ -85,7 +87,12 @@ void displaylevel(int level)
     int i;
     for(i=0; i<3; i++)
     {
-        printf("[%d]\t",p[i].stack[level]);
+        if(p[i].stack[level] == 99) {
+        	printf("[0]\t");
+        }
+        else {
+        	printf("[%d]\t",p[i].stack[level]);
+        }
     }
     printf("\n");         
 }    
