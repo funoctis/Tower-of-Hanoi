@@ -1,0 +1,58 @@
+main
+[1]     [0]     [0]
+[2]     [0]     [0]
+[3]     [0]     [0]
+Tower of Hanoi
+Objective: Your goal is to insert the numbers into the third pole such that from top to bottom, they are in ascending order
+Rule: You cannot put an greater number above a smaller number at any point in the game
+Good luck!
+Choose pole to pop from: 0
+
+Choose pole to push to: 2
+
+[0]     [0]     [0]
+[2]     [0]     [0]
+[3]     [0]     [1]
+Choose pole to pop from: 0
+
+Choose pole to push to: 1
+
+[0]     [0]     [0]
+[0]     [0]     [0]
+[3]     [2]     [1]
+Choose pole to pop from: 2
+
+Choose pole to push to: 1
+
+[0]     [0]     [0]
+[0]     [1]     [0]
+[3]     [2]     [0]
+Choose pole to pop from: 0
+
+Choose pole to push to: 2
+
+[0]     [0]     [0]
+[0]     [1]     [0]
+[0]     [2]     [3]
+Choose pole to pop from: 1
+
+Choose pole to push to: 0
+
+[0]     [0]     [0]
+[0]     [0]     [0]
+[1]     [2]     [3]
+Choose pole to pop from: 1
+
+Choose pole to push to: 2
+
+[0]     [0]     [0]
+[0]     [0]     [2]
+[1]     [0]     [3]
+Choose pole to pop from: 0
+
+Choose pole to push to: 2
+
+[0]     [0]     [1]
+[0]     [0]     [2]
+[0]     [0]     [3]
+Congratulations, you win!
