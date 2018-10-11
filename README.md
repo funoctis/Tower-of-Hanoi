@@ -16,7 +16,7 @@
 Tower of Hanoi is a game in which the disks are inserted and removed on the poles only from end, i.e. top. This makes stack the ideal data structure to be used as it follows the similar principle of Last in First Out (LIFO). 
 
 # Algorithm
-
+```
 1. Initialize the poles, with pole 0 initially having all the numbers.
 2. Display the poles to the user.
 3. Ask user for their move.
@@ -26,7 +26,7 @@ Tower of Hanoi is a game in which the disks are inserted and removed on the pole
     - else goto 2.
 6. Print Congratulatory message.
 7. Exit.
-
+```
 
 
 
