@@ -1,0 +1,56 @@
+Example 1:-
+Enter the number of disks : 3
+The total number of moves used for moving the disks in the alternate pole is 7
+
+The sequence of moves involved in the Tower of Hanoi are :
+
+ Move disk 1 from pole A to pole C
+
+ Move disk 2 from pole A to pole B
+
+ Move disk 1 from pole C to pole B
+
+ Move disk 3 from pole A to pole C
+
+ Move disk 1 from pole B to pole A
+
+ Move disk 2 from pole B to pole C
+
+ Move disk 1 from pole A to pole C
+ 
+ 
+Example 2:-
+ Enter the number of disks : 4
+The total number of moves used for moving the disks in the alternate pole is 15
+
+The sequence of moves involved in the Tower of Hanoi are :
+
+ Move disk 1 from pole A to pole B
+
+ Move disk 2 from pole A to pole C
+
+ Move disk 1 from pole B to pole C
+
+ Move disk 3 from pole A to pole B
+
+ Move disk 1 from pole C to pole A
+
+ Move disk 2 from pole C to pole B
+
+ Move disk 1 from pole A to pole B
+
+ Move disk 4 from pole A to pole C
+
+ Move disk 1 from pole B to pole C
+
+ Move disk 2 from pole B to pole A
+
+ Move disk 1 from pole C to pole A
+
+ Move disk 3 from pole B to pole C
+
+ Move disk 1 from pole A to pole B
+
+ Move disk 2 from pole A to pole C
+
+ Move disk 1 from pole B to pole C
