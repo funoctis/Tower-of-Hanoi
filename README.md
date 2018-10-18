@@ -1,5 +1,7 @@
 # Tower-of-Hanoi
 
+**Mini-project for the Data Structures course**
+
 **Tower of Hanoi is a puzzle game, where one has to move disks of different size (or in this case, numbers) between poles in order to complete the puzzle.**
 
 # Functions used
