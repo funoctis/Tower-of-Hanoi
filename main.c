@@ -87,8 +87,8 @@ void displaylevel(int level)
     int i;
     for(i=0; i<3; i++)
     {
-        if(p[i].stack[level] == 99) {
-        	printf("[0]\t");
+        if(p[i].stack[level] == 99 || p[i].stack[level] == 0) {
+        	printf("[ ]\t");
         }
         else {
         	printf("[%d]\t",p[i].stack[level]);
